@@ -371,6 +371,32 @@
             max-width: 520px;
         }
 
+        /* Hero skills grid */
+        .hero-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+            max-width: 560px;
+        }
+
+        .hero-skills .skill-tag {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            padding: 0.3rem 0.6rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .hero-skills .skill-tag:hover {
+            color: var(--text);
+            border-color: var(--accent);
+        }
+
         .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
         .btn {
@@ -739,7 +765,6 @@
         <div class="nav-links">
             <a href="#about" data-i18n="nav_about">about</a>
             <a href="#experience" data-i18n="nav_experience">experience</a>
-            <a href="#skills" data-i18n="nav_skills">skills</a>
             <a href="#articles" data-i18n="nav_articles">articles</a>
             <a href="#contact" data-i18n="nav_contact">contact</a>
             <button class="lang-toggle" id="langToggle" aria-label="Switch language">
@@ -754,6 +779,9 @@
         <div class="hero-inner">
             <h1>Paulo de Sousa</h1>
             <p class="subtitle"><span data-i18n="hero_subtitle">Senior Database Administrator. 20+ years keeping databases fast, reliable, and secure.</span></p>
+            <div class="hero-skills" id="heroSkills">
+                <!-- Skills injected by JS -->
+            </div>
             <div class="hero-actions">
                 <a href="https://www.linkedin.com/in/paulorsousa/" target="_blank" rel="noopener" class="btn btn-primary">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
@@ -773,7 +801,7 @@
         <p class="section-label" data-i18n="about_label">// about</p>
         <h2 class="section-title" data-i18n="about_title">A bit about me</h2>
         <div class="about-text">
-            <p data-i18n="about_p1">As a Senior Oracle Database Administrator at <strong>Alpega</strong>, I manage, optimize, and secure Oracle and PostgreSQL environments across multiple clients and projects. With over <strong>20 years of experience</strong> in database administration, development, and maintenance, I bring a strong balance of technical depth and practical problem-solving.</p>
+            <p data-i18n="about_p1">As a Senior Oracle Database Administrator, I manage, optimize, and secure Oracle and PostgreSQL environments across multiple clients and projects. With over <strong>20 years of experience</strong> in database administration, development, and maintenance, I bring a strong balance of technical depth and practical problem-solving.</p>
             <p data-i18n="about_p2">I hold <strong>Oracle Certified Associate (OCA)</strong> and <strong>Oracle Certified Professional (OCP)</strong> credentials, along with an <strong>MBA in Project Management</strong>. My background allows me to align technical solutions with business goals while maintaining high standards of reliability and performance.</p>
             <p data-i18n="about_p3">I have a strong interest in technology and innovation, and I continuously explore better and more efficient ways of working. I'm experienced with <strong>DevOps practices</strong>, including automation, scripting, and CI/CD pipelines, and I regularly work with tools such as <strong>Git</strong> and <strong>Ansible</strong> to streamline operations and improve delivery.</p>
             <p data-i18n="about_p4">Recently, I've been focusing on <strong>AI agents</strong>, acting as an AI champion within the company, exploring practical use cases and integrating intelligent automation into existing workflows.</p>
@@ -793,31 +821,6 @@
         <div class="exp-card">
             <div class="role" data-i18n="exp_role2">Database Administrator & Developer</div>
             <div class="company" data-i18n="exp_company2">20+ years across Oracle, PostgreSQL, MySQL <span>· Multi-client environments</span></div>
-        </div>
-    </section>
-
-    <!-- SKILLS -->
-    <div class="divider"><hr></div>
-    <section id="skills">
-        <p class="section-label" data-i18n="skills_label">// skills</p>
-        <h2 class="section-title" data-i18n="skills_title">Technologies & tools</h2>
-        <div class="skills-grid">
-            <div class="skill-tag">Oracle Database</div>
-            <div class="skill-tag">PostgreSQL</div>
-            <div class="skill-tag">MySQL</div>
-            <div class="skill-tag" data-i18n="skill_oci">OCI (Oracle Cloud)</div>
-            <div class="skill-tag">Python</div>
-            <div class="skill-tag">Git</div>
-            <div class="skill-tag">Ansible</div>
-            <div class="skill-tag">CI/CD</div>
-            <div class="skill-tag">DevOps</div>
-            <div class="skill-tag">Linux</div>
-            <div class="skill-tag" data-i18n="skill_shell">Shell Scripting</div>
-            <div class="skill-tag" data-i18n="skill_ai">AI Agents</div>
-            <div class="skill-tag" data-i18n="skill_perf">Performance Tuning</div>
-            <div class="skill-tag">RMAN</div>
-            <div class="skill-tag">Data Guard</div>
-            <div class="skill-tag" data-i18n="skill_pm">Project Management</div>
         </div>
     </section>
 
@@ -889,6 +892,21 @@
     </footer>
 
     <script>
+        // --- Hero Skills Injection ---
+        const heroSkills = [
+            'Oracle Database', 'PostgreSQL', 'MySQL', 'OCI', 'Python',
+            'Git', 'Ansible', 'CI/CD', 'DevOps', 'Linux',
+            'Shell Scripting', 'AI Agents', 'Performance Tuning', 'RMAN', 'Data Guard'
+        ];
+
+        const heroSkillsEl = document.getElementById('heroSkills');
+        heroSkills.forEach(s => {
+            const tag = document.createElement('span');
+            tag.className = 'skill-tag';
+            tag.textContent = s;
+            heroSkillsEl.appendChild(tag);
+        });
+
         // Article data extracted from LinkedIn export
         const articles = [
             {
@@ -1064,10 +1082,10 @@
                 nav_skills: "skills",
                 nav_articles: "articles",
                 nav_contact: "contact",
-                hero_subtitle: 'Senior Database Administrator at <strong>Alpega</strong>. 20+ years keeping databases fast, reliable, and secure.',
+                hero_subtitle: 'Senior Database Administrator. 20+ years keeping databases fast, reliable, and secure.',
                 about_label: "// about",
                 about_title: "A bit about me",
-                about_p1: 'As a Senior Oracle Database Administrator at <strong>Alpega</strong>, I manage, optimize, and secure Oracle and PostgreSQL environments across multiple clients and projects. With over <strong>20 years of experience</strong> in database administration, development, and maintenance, I bring a strong balance of technical depth and practical problem-solving.',
+                about_p1: 'As a Senior Oracle Database Administrator, I manage, optimize, and secure Oracle and PostgreSQL environments across multiple clients and projects. With over <strong>20 years of experience</strong> in database administration, development, and maintenance, I bring a strong balance of technical depth and practical problem-solving.',
                 about_p2: 'I hold <strong>Oracle Certified Associate (OCA)</strong> and <strong>Oracle Certified Professional (OCP)</strong> credentials, along with an <strong>MBA in Project Management</strong>. My background allows me to align technical solutions with business goals while maintaining high standards of reliability and performance.',
                 about_p3: 'I have a strong interest in technology and innovation, and I continuously explore better and more efficient ways of working. I\'m experienced with <strong>DevOps practices</strong>, including automation, scripting, and CI/CD pipelines, and I regularly work with tools such as <strong>Git</strong> and <strong>Ansible</strong> to streamline operations and improve delivery.',
                 about_p4: 'Recently, I\'ve been focusing on <strong>AI agents</strong>, acting as an AI champion within the company, exploring practical use cases and integrating intelligent automation into existing workflows.',
@@ -1078,13 +1096,6 @@
                 exp_loc1: "· Vienna, Austria",
                 exp_role2: "Database Administrator & Developer",
                 exp_company2: '20+ years across Oracle, PostgreSQL, MySQL <span>· Multi-client environments</span>',
-                skills_label: "// skills",
-                skills_title: "Technologies & tools",
-                skill_oci: "OCI (Oracle Cloud)",
-                skill_shell: "Shell Scripting",
-                skill_ai: "AI Agents",
-                skill_perf: "Performance Tuning",
-                skill_pm: "Project Management",
                 articles_label: "// articles",
                 articles_title: "Things I've written",
                 contact_label: "// contact",
@@ -1109,10 +1120,10 @@
                 nav_skills: "habilidades",
                 nav_articles: "artigos",
                 nav_contact: "contato",
-                hero_subtitle: 'Administrador Sênior de Banco de Dados na <strong>Alpega</strong>. Mais de 20 anos mantendo bancos de dados rápidos, confiáveis e seguros.',
+                hero_subtitle: 'Administrador Sênior de Banco de Dados. Mais de 20 anos mantendo bancos de dados rápidos, confiáveis e seguros.',
                 about_label: "// sobre",
                 about_title: "Um pouco sobre mim",
-                about_p1: 'Como Administrador Sênior de Banco de Dados Oracle na <strong>Alpega</strong>, gerencio, otimizo e protejo ambientes Oracle e PostgreSQL para múltiplos clientes e projetos. Com mais de <strong>20 anos de experiência</strong> em administração, desenvolvimento e manutenção de bancos de dados, trago um forte equilíbrio entre profundidade técnica e resolução prática de problemas.',
+                about_p1: 'Como Administrador Sênior de Banco de Dados Oracle, gerencio, otimizo e protejo ambientes Oracle e PostgreSQL para múltiplos clientes e projetos. Com mais de <strong>20 anos de experiência</strong> em administração, desenvolvimento e manutenção de bancos de dados, trago um forte equilíbrio entre profundidade técnica e resolução prática de problemas.',
                 about_p2: 'Possuo credenciais <strong>Oracle Certified Associate (OCA)</strong> e <strong>Oracle Certified Professional (OCP)</strong>, além de <strong>MBA em Gerenciamento de Projetos</strong>. Minha experiência me permite alinhar soluções técnicas aos objetivos de negócio, mantendo altos padrões de confiabilidade e performance.',
                 about_p3: 'Tenho grande interesse em tecnologia e inovação, e busco continuamente formas melhores e mais eficientes de trabalhar. Sou experiente em <strong>práticas DevOps</strong>, incluindo automação, scripting e pipelines CI/CD, e trabalho regularmente com ferramentas como <strong>Git</strong> e <strong>Ansible</strong> para otimizar operações e melhorar entregas.',
                 about_p4: 'Recentemente, tenho focado em <strong>agentes de IA</strong>, atuando como campeão de IA dentro da empresa, explorando casos de uso práticos e integrando automação inteligente nos fluxos de trabalho existentes.',
@@ -1123,13 +1134,6 @@
                 exp_loc1: "· Viena, Áustria",
                 exp_role2: "Administrador de Banco de Dados & Desenvolvedor",
                 exp_company2: '20+ anos com Oracle, PostgreSQL, MySQL <span>· Ambientes multi-cliente</span>',
-                skills_label: "// habilidades",
-                skills_title: "Tecnologias & ferramentas",
-                skill_oci: "OCI (Oracle Cloud)",
-                skill_shell: "Shell Scripting",
-                skill_ai: "Agentes de IA",
-                skill_perf: "Tuning de Performance",
-                skill_pm: "Gerenciamento de Projetos",
                 articles_label: "// artigos",
                 articles_title: "Artigos que escrevi",
                 contact_label: "// contato",
