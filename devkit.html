@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SEO: Primary meta tags
+  ═══════════════════════════════════════════════════════════════ -->
+  <title>DevKit — Free Online Developer Tools | Base64, JSON, Regex &amp; JWT Debugger</title>
+  <meta name="description" content="Free online developer tools: Base64 encoder/decoder, JSON validator, Regex tester, and JWT Debugger with live expiry countdown and security audit. Fast, private, no sign-up." />
+  <meta name="keywords" content="base64 encoder decoder online, json validator formatter, regex tester online, jwt debugger, jwt decoder online, json web token decoder, jwt expiry checker, jwt security audit, developer tools, free coding tools" />
+  <meta name="author" content="DevKit" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://paulorsousa.com/devkit.html" />
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SEO: Open Graph (Facebook, LinkedIn sharing)
+  ═══════════════════════════════════════════════════════════════ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://paulorsousa.com/devkit.html" />
+  <meta property="og:title" content="DevKit — Free Online Developer Tools" />
+  <meta property="og:description" content="Base64 encoder/decoder, JSON validator, Regex tester, and JWT Debugger with live expiry countdown. Free, instant, no sign-up required." />
+  <meta property="og:image" content="https://paulorsousa.com/og-image.png" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SEO: Twitter Card
+  ═══════════════════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DevKit — Free Online Developer Tools" />
+  <meta name="twitter:description" content="Base64 · JSON Validator · Regex Tester. Free, instant, no login." />
+  <meta name="twitter:image" content="https://paulorsousa.com/og-image.png" />
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SEO: JSON-LD Structured Data (rich results in Google)
+  ═══════════════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "DevKit",
+    "url": "https://paulorsousa.com/devkit.html",
+    "description": "Free online developer tools including Base64 encoder/decoder, JSON validator and formatter, and regular expression tester with live match highlighting.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Base64 Encoder and Decoder",
+      "JSON Syntax Validator and Formatter",
+      "Regular Expression Tester with live highlighting",
+      "JWT Debugger with live expiry countdown and security audit"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I encode text to Base64 online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paste your text into the Base64 tool above and click Encode. The result appears instantly in the output box."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I validate JSON syntax?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paste your JSON into the validator above and click Check JSON. It will highlight errors with line and column numbers, or show a formatted version if valid."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I test a regular expression online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enter your regex pattern and the text you want to test in the Regex Tester above. Matches are highlighted in real time."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       Fonts
+  ═══════════════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #09090f;
+      --surface:  #111118;
+      --surface2: #18181f;
+      --border:   #22232e;
+      --border2:  #333447;
+      --text:     #dde1f5;
+      --muted:    #5e6080;
+      --dim:      #3a3c54;
+      --accent:   #5affc2;
+      --accent-d: #1a3d30;
+      --blue:     #7ca9ff;
+      --blue-d:   #182040;
+      --pink:     #ff7eb3;
+      --pink-d:   #3a1228;
+      --error:    #ff6b8a;
+      --success:  #5affc2;
+      --warn:     #ffd166;
+      --gold-d:   #2b2000;
+      --mono:     'JetBrains Mono', 'Fira Code', monospace;
+      --sans:     'Syne', system-ui, sans-serif;
+      --r:        8px;
+      --r-lg:     14px;
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 13.5px;
+      line-height: 1.65;
+    }
+
+    /* ── HEADER ────────────────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(9,9,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--sans);
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo em { font-style: normal; color: var(--accent); }
+
+    nav { display: flex; gap: 4px; }
+    nav a {
+      font-size: 11.5px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: all 0.14s;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    nav a:hover { color: var(--text); border-color: var(--border2); background: var(--surface2); }
+
+    /* ── HERO ──────────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      padding: 4.5rem 1.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -40px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 300px;
+      background: radial-gradient(ellipse, rgba(90,255,194,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent-d);
+      background: rgba(90,255,194,0.06);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-family: var(--sans);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 520px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+    .hero-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .badge {
+      font-size: 11.5px;
+      color: var(--muted);
+      border: 1px solid var(--border2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--surface2);
+    }
+
+    /* ── LAYOUT ────────────────────────────────────────── */
+    main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+
+    /* ── AD SLOT ───────────────────────────────────────── */
+    .ad-slot {
+      background: var(--surface);
+      border: 1px dashed var(--border2);
+      border-radius: var(--r-lg);
+      padding: 1.2rem;
+      text-align: center;
+      color: var(--dim);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 0.75rem 0 2.5rem;
+      min-height: 90px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    /* Replace the inner content with your Google AdSense <ins> tag */
+
+    /* ── TOOL SECTION ──────────────────────────────────── */
+    .tool-section {
+      scroll-margin-top: 70px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .tool-header {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface2);
+    }
+
+    .tool-icon {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .icon-green { background: var(--accent-d); color: var(--accent); }
+    .icon-blue  { background: var(--blue-d);   color: var(--blue); }
+    .icon-pink  { background: var(--pink-d);   color: var(--pink); }
+    .icon-gold  { background: var(--gold-d);   color: var(--warn); }
+
+    .tool-title-wrap { flex: 1; }
+    .tool-title {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .tool-subtitle { font-size: 11.5px; color: var(--muted); }
+
+    .tool-body { padding: 1.25rem 1.5rem; }
+
+    /* ── TEXTAREA ROW ──────────────────────────────────── */
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    textarea, input[type="text"] {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      border-radius: var(--r);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height: 1.65;
+      padding: 10px 12px;
+      resize: vertical;
+      transition: border-color 0.14s, box-shadow 0.14s;
+      outline: none;
+    }
+    textarea:focus, input[type="text"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(90,255,194,0.1);
+    }
+    textarea { min-height: 130px; }
+
+    .btn-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-top: 0;
+      min-width: 106px;
+    }
+
+    /* ── BUTTONS ───────────────────────────────────────── */
+    .btn {
+      display: block;
+      padding: 9px 14px;
+      border-radius: var(--r);
+      border: 1px solid;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.14s;
+      white-space: nowrap;
+      width: 100%;
+    }
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #050f0b;
+    }
+    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--border2);
+      color: var(--muted);
+    }
+    .btn-secondary:hover {
+      border-color: var(--text);
+      color: var(--text);
+      background: var(--surface2);
+    }
+
+    .btn-blue-p {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #05101f;
+    }
+    .btn-blue-p:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+    .btn-pink-p {
+      background: var(--pink);
+      border-color: var(--pink);
+      color: #1a050f;
+    }
+    .btn-pink-p:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+    /* ── REGEX FLAGS ───────────────────────────────────── */
+    .flags-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .flags-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px; }
+    .flag-btn {
+      padding: 3px 10px;
+      border-radius: 5px;
+      border: 1px solid var(--border2);
+      background: var(--bg);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+    .flag-btn.active { background: var(--pink-d); border-color: var(--pink); color: var(--pink); }
+
+    .regex-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    @media (max-width: 540px) { .regex-inputs { grid-template-columns: 1fr; } }
+    .field-label { font-size: 10.5px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 5px; }
+
+    /* ── OUTPUT BOX ────────────────────────────────────── */
+    .output-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 10px 12px;
+      min-height: 80px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-break: break-all;
+      position: relative;
+    }
+    .output-box.output-success { border-color: rgba(90,255,194,0.3); }
+    .output-box.output-error   { border-color: rgba(255,107,138,0.3); color: var(--error); }
+    .output-placeholder { color: var(--dim); font-style: italic; }
+
+    .output-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .output-label span { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    .copy-btn {
+      font-size: 10.5px;
+      padding: 3px 10px;
+      border-radius: 5px;
+      border: 1px solid var(--border2);
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--mono);
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── STATUS PILL ───────────────────────────────────── */
+    .status-pill {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .pill-ok   { background: rgba(90,255,194,0.1);  color: var(--accent); border: 1px solid rgba(90,255,194,0.3); }
+    .pill-err  { background: rgba(255,107,138,0.1); color: var(--error);  border: 1px solid rgba(255,107,138,0.3); }
+    .pill-info { background: rgba(124,169,255,0.1); color: var(--blue);   border: 1px solid rgba(124,169,255,0.3); }
+
+    /* ── JSON STATS ────────────────────────────────────── */
+    .stats-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+    .stat-chip {
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 10px;
+    }
+    .stat-chip b { color: var(--text); font-weight: 500; }
+
+    /* ── MATCH HIGHLIGHT ───────────────────────────────── */
+    .match-preview {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 10px 12px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height: 1.9;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    mark.hit {
+      background: rgba(255,126,179,0.25);
+      color: var(--pink);
+      border-radius: 3px;
+      padding: 1px 0;
+      outline: 1px solid rgba(255,126,179,0.4);
+    }
+
+    /* ── FAQ SECTION ───────────────────────────────────── */
+    .faq { margin-top: 4rem; }
+    .faq h2 {
+      font-family: var(--sans);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+    details {
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      margin-bottom: 8px;
+      background: var(--surface);
+      overflow: hidden;
+    }
+    summary {
+      padding: 13px 16px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 500;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; color: var(--muted); font-size: 18px; line-height: 1; }
+    details[open] summary::after { content: '−'; }
+    details[open] summary { border-bottom: 1px solid var(--border); }
+    .faq-body { padding: 13px 16px; color: var(--muted); font-size: 13px; line-height: 1.75; }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      color: var(--dim);
+      font-size: 12px;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    /* ── LOADING SPINNER ───────────────────────────────── */
+    .spinner {
+      display: inline-block;
+      width: 12px; height: 12px;
+      border: 2px solid var(--border2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .btn-gold-p {
+      background: var(--warn);
+      border-color: var(--warn);
+      color: #1a1200;
+    }
+    .btn-gold-p:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+    /* ── JWT DEBUGGER ──────────────────────────────────── */
+    .jwt-token-display {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      border-radius: var(--r);
+      padding: 10px 12px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      line-height: 1.9;
+      word-break: break-all;
+      margin-bottom: 6px;
+    }
+    .jwt-h   { color: var(--pink); }
+    .jwt-p   { color: var(--blue); }
+    .jwt-s   { color: var(--muted); }
+    .jwt-dot { color: var(--dim); user-select: none; }
+
+    .jwt-token-legend { display: flex; gap: 14px; margin-bottom: 12px; }
+    .jwt-leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+    .jwt-leg-dot  { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .jwt-leg-h    { background: var(--pink); }
+    .jwt-leg-p    { background: var(--blue); }
+    .jwt-leg-s    { background: var(--muted); }
+
+    .jwt-status-row { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+
+    .jwt-countdown {
+      flex: 1;
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: var(--r);
+      min-width: 180px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .jwt-countdown.ok   { background: rgba(90,255,194,0.07);  border: 1px solid rgba(90,255,194,0.25);  color: var(--accent); }
+    .jwt-countdown.err  { background: rgba(255,107,138,0.07); border: 1px solid rgba(255,107,138,0.25); color: var(--error); }
+    .jwt-countdown.warn { background: rgba(255,209,102,0.07); border: 1px solid rgba(255,209,102,0.22); color: var(--warn); }
+
+    .jwt-warning { border-radius: var(--r); padding: 10px 14px; margin-bottom: 8px; }
+    .jwt-warning-critical { background: rgba(255,107,138,0.07); border: 1px solid rgba(255,107,138,0.3); }
+    .jwt-warning-warn     { background: rgba(255,209,102,0.07); border: 1px solid rgba(255,209,102,0.25); }
+    .jwt-warning-info     { background: rgba(124,169,255,0.07); border: 1px solid rgba(124,169,255,0.25); }
+    .jwt-warning-title { font-size: 12.5px; font-weight: 600; margin-bottom: 4px; }
+    .jwt-warning-critical .jwt-warning-title { color: var(--error); }
+    .jwt-warning-warn     .jwt-warning-title { color: var(--warn); }
+    .jwt-warning-info     .jwt-warning-title { color: var(--blue); }
+    .jwt-warning-body { font-size: 12px; line-height: 1.6; }
+    .jwt-warning-critical .jwt-warning-body { color: rgba(255,107,138,0.8); }
+    .jwt-warning-warn     .jwt-warning-body { color: rgba(255,209,102,0.8); }
+    .jwt-warning-info     .jwt-warning-body { color: rgba(124,169,255,0.8); }
+
+    .jwt-panels-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px; }
+    @media (max-width: 640px) { .jwt-panels-grid { grid-template-columns: 1fr; } }
+
+    .jwt-panel-label {
+      font-size: 10.5px; color: var(--muted); text-transform: uppercase;
+      letter-spacing: 0.06em; margin-bottom: 6px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .jwt-claims { margin-top: 6px; }
+    .jwt-claim-row {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 5px;
+    }
+    .jwt-claim-key { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; flex-wrap: wrap; }
+    .jwt-claim-key code {
+      color: var(--warn);
+      font-family: var(--mono);
+      background: rgba(255,209,102,0.1);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 11.5px;
+    }
+    .jwt-claim-full-name { font-size: 11px; color: var(--muted); }
+    .jwt-claim-value { font-size: 12.5px; color: var(--text); font-family: var(--mono); margin-bottom: 3px; word-break: break-all; white-space: pre-wrap; }
+    .jwt-claim-ts   { font-size: 11px; color: var(--muted); margin-top: 1px; }
+    .jwt-claim-desc { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+
+    .jwt-sig-note {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 10px 14px;
+      font-size: 12px; color: var(--muted); line-height: 1.6;
+    }
+    .jwt-sig-note a { color: var(--blue); }
+    .jwt-sig-note code { font-family: var(--mono); font-size: 11.5px; }
+
+    @media (max-width: 600px) {
+      .input-row { grid-template-columns: 1fr; }
+      .btn-col { flex-direction: row; flex-wrap: wrap; }
+      .btn-col .btn { width: auto; flex: 1; }
+      header { padding: 0 1rem; }
+      nav a { padding: 5px 8px; font-size: 10.5px; }
+      .hero { padding: 3rem 1rem 2rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════════════════ -->
+<header>
+  <a href="/" class="logo">Dev<em>Kit</em></a>
+  <nav>
+    <a href="#base64">Base64</a>
+    <a href="#json">JSON</a>
+    <a href="#regex">Regex</a>
+    <a href="#jwt">JWT</a>
+  </nav>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-eyebrow">Free · Instant · No sign-up</div>
+  <h1>Developer tools<br><span>that just work</span></h1>
+  <p>Base64, JSON, Regex, and JWT debugging in one place. Everything runs in your browser — nothing is stored or logged.</p>
+  <div class="hero-badges">
+    <span class="badge">100% private</span>
+    <span class="badge">No rate limits</span>
+    <span class="badge">Mobile friendly</span>
+    <span class="badge">Open source</span>
+  </div>
+</div>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════════
+     TOOL 1 — BASE64
+═══════════════════════════════════════════════════════ -->
+<section class="tool-section" id="base64" aria-labelledby="base64-title">
+  <div class="tool-header">
+    <div class="tool-icon icon-green">⟨/⟩</div>
+    <div class="tool-title-wrap">
+      <div class="tool-title" id="base64-title">Base64 Encoder / Decoder</div>
+      <div class="tool-subtitle">Convert text or data to Base64 and back — instantly</div>
+    </div>
+  </div>
+  <div class="tool-body">
+    <div class="input-row">
+      <div>
+        <div class="field-label">Input</div>
+        <textarea id="b64-input" placeholder="Paste your text or Base64 string here…" spellcheck="false" aria-label="Base64 input text"></textarea>
+      </div>
+      <div class="btn-col">
+        <button class="btn btn-primary" onclick="b64Encode()" aria-label="Encode to Base64">↑ Encode</button>
+        <button class="btn btn-secondary" onclick="b64Decode()" aria-label="Decode from Base64">↓ Decode</button>
+        <button class="btn btn-secondary" onclick="clearTool('b64')" aria-label="Clear input and output">Clear</button>
+      </div>
+    </div>
+    <div class="output-label">
+      <span>Output</span>
+      <button class="copy-btn" onclick="copyOutput('b64-output')" aria-label="Copy output to clipboard">Copy</button>
+    </div>
+    <div class="output-box" id="b64-output" role="region" aria-live="polite">
+      <span class="output-placeholder">Result will appear here…</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     AD SLOT 1 — After Base64
+═══════════════════════════════════════════════════════ -->
+<div class="ad-slot" aria-label="Advertisement">
+  <!-- Replace with Google AdSense code:
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX"
+       data-ad-slot="XXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  -->
+  Advertisement · 728×90
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     TOOL 2 — JSON VALIDATOR
+═══════════════════════════════════════════════════════ -->
+<section class="tool-section" id="json" aria-labelledby="json-title">
+  <div class="tool-header">
+    <div class="tool-icon icon-blue">{ }</div>
+    <div class="tool-title-wrap">
+      <div class="tool-title" id="json-title">JSON Validator &amp; Formatter</div>
+      <div class="tool-subtitle">Validate syntax, pretty-print, and inspect your JSON</div>
+    </div>
+  </div>
+  <div class="tool-body">
+    <div class="input-row">
+      <div>
+        <div class="field-label">Paste JSON</div>
+        <textarea id="json-input" placeholder='{ "hello": "world" }' spellcheck="false" aria-label="JSON input"></textarea>
+      </div>
+      <div class="btn-col">
+        <button class="btn btn-blue-p" onclick="jsonCheck()" aria-label="Validate and format JSON">Check JSON</button>
+        <button class="btn btn-secondary" onclick="jsonMinify()" aria-label="Minify JSON">Minify</button>
+        <button class="btn btn-secondary" onclick="clearTool('json')" aria-label="Clear JSON input and output">Clear</button>
+      </div>
+    </div>
+    <div id="json-status" style="margin-bottom:8px;"></div>
+    <div id="json-stats" class="stats-row" style="display:none;"></div>
+    <div class="output-label">
+      <span>Output</span>
+      <button class="copy-btn" onclick="copyOutput('json-output')" aria-label="Copy formatted JSON">Copy</button>
+    </div>
+    <div class="output-box" id="json-output" role="region" aria-live="polite">
+      <span class="output-placeholder">Formatted JSON will appear here…</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     AD SLOT 2 — After JSON
+═══════════════════════════════════════════════════════ -->
+<div class="ad-slot" aria-label="Advertisement">
+  <!-- Replace with Google AdSense code:
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX"
+       data-ad-slot="XXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  -->
+  Advertisement · 728×90
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     TOOL 3 — REGEX TESTER
+═══════════════════════════════════════════════════════ -->
+<section class="tool-section" id="regex" aria-labelledby="regex-title">
+  <div class="tool-header">
+    <div class="tool-icon icon-pink">.*</div>
+    <div class="tool-title-wrap">
+      <div class="tool-title" id="regex-title">Regular Expression Tester</div>
+      <div class="tool-subtitle">Test patterns, highlight matches, inspect capture groups</div>
+    </div>
+  </div>
+  <div class="tool-body">
+    <div class="regex-inputs">
+      <div>
+        <div class="field-label">Pattern</div>
+        <input type="text" id="rx-pattern" placeholder="e.g. \b\w+@\w+\.\w+\b" spellcheck="false" oninput="regexLive()" aria-label="Regex pattern" />
+      </div>
+      <div>
+        <div class="field-label">Flags</div>
+        <div class="flags-row">
+          <span class="flags-label">Flags</span>
+          <button class="flag-btn active" data-flag="g" onclick="toggleFlag(this)" title="Global — find all matches">g</button>
+          <button class="flag-btn" data-flag="i" onclick="toggleFlag(this)" title="Case insensitive">i</button>
+          <button class="flag-btn" data-flag="m" onclick="toggleFlag(this)" title="Multiline">m</button>
+          <button class="flag-btn" data-flag="s" onclick="toggleFlag(this)" title="Dot matches newline">s</button>
+        </div>
+      </div>
+    </div>
+    <div class="input-row">
+      <div>
+        <div class="field-label">Test string</div>
+        <textarea id="rx-input" placeholder="Paste the text you want to test your pattern against…" spellcheck="false" oninput="regexLive()" aria-label="Test string for regex"></textarea>
+      </div>
+      <div class="btn-col">
+        <button class="btn btn-pink-p" onclick="regexRun()" aria-label="Run regex test">Run Test</button>
+        <button class="btn btn-secondary" onclick="clearTool('rx')" aria-label="Clear regex fields">Clear</button>
+      </div>
+    </div>
+    <div id="rx-status" style="margin-bottom:8px;"></div>
+    <div class="output-label">
+      <span>Match Preview</span>
+      <span id="rx-count" style="font-size:11px;color:var(--muted);"></span>
+    </div>
+    <div class="match-preview" id="rx-preview" role="region" aria-live="polite">
+      <span class="output-placeholder">Matches will be highlighted here…</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     AD SLOT 3 — After Regex
+═══════════════════════════════════════════════════════ -->
+<div class="ad-slot" aria-label="Advertisement">
+  <!-- Replace with Google AdSense code:
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX"
+       data-ad-slot="XXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  -->
+  Advertisement · 728×90
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     TOOL 4 — JWT DEBUGGER
+═══════════════════════════════════════════════════════ -->
+<section class="tool-section" id="jwt" aria-labelledby="jwt-title">
+  <div class="tool-header">
+    <div class="tool-icon icon-gold">⊙</div>
+    <div class="tool-title-wrap">
+      <div class="tool-title" id="jwt-title">JWT Debugger &amp; Expiry Checker</div>
+      <div class="tool-subtitle">Decode tokens, audit claims, and track expiry live — with plain-English explanations</div>
+    </div>
+  </div>
+  <div class="tool-body">
+
+    <div class="input-row">
+      <div>
+        <div class="field-label">Paste JWT token</div>
+        <textarea id="jwt-input"
+          placeholder="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyXzEyMyIsIm5hbWUiOiJKYW5lIERvZSIsImlhdCI6MTcxNDAwMDAwMCwiZXhwIjoxNzE0MDg2NDAwfQ.signature"
+          spellcheck="false"
+          oninput="jwtLive()"
+          aria-label="JWT token input"></textarea>
+      </div>
+      <div class="btn-col">
+        <button class="btn btn-gold-p" onclick="jwtDecode()" aria-label="Decode JWT token">Decode</button>
+        <button class="btn btn-secondary" onclick="jwtClear()" aria-label="Clear JWT fields">Clear</button>
+      </div>
+    </div>
+
+    <div id="jwt-error" style="display:none; margin-bottom:10px;"></div>
+
+    <!-- Colorized token structure -->
+    <div id="jwt-vis" style="display:none; margin-bottom:12px;">
+      <div class="field-label" style="margin-bottom:5px;">Token structure</div>
+      <div class="jwt-token-display" id="jwt-token-parts"></div>
+      <div class="jwt-token-legend">
+        <span class="jwt-leg-item"><span class="jwt-leg-dot jwt-leg-h"></span>Header</span>
+        <span class="jwt-leg-item"><span class="jwt-leg-dot jwt-leg-p"></span>Payload</span>
+        <span class="jwt-leg-item"><span class="jwt-leg-dot jwt-leg-s"></span>Signature</span>
+      </div>
+    </div>
+
+    <!-- Validity badge + live countdown -->
+    <div id="jwt-status-wrap" style="display:none; margin-bottom:12px;">
+      <div class="jwt-status-row">
+        <div id="jwt-validity-badge"></div>
+        <div id="jwt-countdown" class="jwt-countdown"></div>
+      </div>
+    </div>
+
+    <!-- Security warnings -->
+    <div id="jwt-warnings"></div>
+
+    <!-- Header + Payload side-by-side -->
+    <div id="jwt-panels" style="display:none;">
+      <div class="jwt-panels-grid">
+
+        <div>
+          <div class="jwt-panel-label">
+            <span>Header</span>
+            <button class="copy-btn" onclick="copyJwtSection('jwt-header-json')">Copy</button>
+          </div>
+          <div class="output-box" id="jwt-header-json" style="min-height:70px; margin-bottom:8px;"></div>
+          <div id="jwt-header-claims" class="jwt-claims"></div>
+        </div>
+
+        <div>
+          <div class="jwt-panel-label">
+            <span>Payload — Claims</span>
+            <button class="copy-btn" onclick="copyJwtSection('jwt-payload-json')">Copy</button>
+          </div>
+          <div class="output-box" id="jwt-payload-json" style="min-height:70px; margin-bottom:8px;"></div>
+          <div id="jwt-payload-claims" class="jwt-claims"></div>
+        </div>
+
+      </div>
+
+      <div class="jwt-sig-note">
+        <b style="color:var(--warn)">Signature not verified:</b> Verifying a JWT signature requires your secret or public key — never paste either into a browser tool. To verify, use a trusted JWT library (<code>jsonwebtoken</code> for Node.js, <code>PyJWT</code> for Python, <code>System.IdentityModel.Tokens.Jwt</code> for .NET) or a private instance of <a href="https://jwt.io" target="_blank" rel="noopener noreferrer">jwt.io</a> for non-sensitive tokens.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     AD SLOT 4 — After JWT
+═══════════════════════════════════════════════════════ -->
+<div class="ad-slot" aria-label="Advertisement">
+  <!-- Replace with Google AdSense code:
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX"
+       data-ad-slot="XXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  -->
+  Advertisement · 728×90
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     FAQ (SEO content)
+═══════════════════════════════════════════════════════ -->
+<section class="faq">
+  <h2>Frequently asked questions</h2>
+
+  <details>
+    <summary>What is Base64 encoding and when should I use it?</summary>
+    <div class="faq-body">Base64 converts binary or text data into a string using 64 printable ASCII characters. It's widely used to embed images in HTML or CSS, encode binary payloads in JSON APIs, transmit data in email attachments, and store credentials in HTTP Basic Auth headers. It's encoding — not encryption — so never use it to secure sensitive information.</div>
+  </details>
+
+  <details>
+    <summary>What does a JSON validator actually check?</summary>
+    <div class="faq-body">A JSON validator parses your text against the JSON specification (RFC 8259). Common errors it catches include: trailing commas after the last key-value pair, single quotes instead of double quotes around strings, unquoted keys, missing colons or commas, and unterminated strings. This tool also pretty-prints valid JSON and shows structural stats like depth and total key count.</div>
+  </details>
+
+  <details>
+    <summary>What do the regex flags g, i, m, and s mean?</summary>
+    <div class="faq-body"><b>g</b> (global): Find all matches, not just the first. <b>i</b> (insensitive): Case-insensitive matching, so <code>/hello/i</code> matches "Hello", "HELLO", etc. <b>m</b> (multiline): <code>^</code> and <code>$</code> match start/end of each line rather than the whole string. <b>s</b> (dotAll): The <code>.</code> metacharacter also matches newline characters.</div>
+  </details>
+
+  <details>
+    <summary>Is my data sent to a server?</summary>
+    <div class="faq-body">The Base64 and Regex tools run entirely in your browser using JavaScript — your input never leaves your machine. The JSON validator sends your input to our server only to format it server-side, but no data is stored, logged, or shared. You can always validate locally using your browser's console: <code>JSON.parse(yourString)</code>.</div>
+  </details>
+
+  <details>
+    <summary>How do I decode a Base64 string in JavaScript?</summary>
+    <div class="faq-body">In a browser: <code>atob('SGVsbG8=')</code>. In Node.js: <code>Buffer.from('SGVsbG8=', 'base64').toString('utf-8')</code>. To encode: browser uses <code>btoa('Hello')</code> and Node.js uses <code>Buffer.from('Hello').toString('base64')</code>.</div>
+  </details>
+
+  <details>
+    <summary>What is a JWT and how does it work?</summary>
+    <div class="faq-body">A JSON Web Token (JWT) is a compact, URL-safe token with three Base64url-encoded parts separated by dots: <b>header.payload.signature</b>. The header declares the signing algorithm (e.g. RS256). The payload carries claims — structured assertions about the user or session (who they are, what they can do, when the token expires). The signature is a cryptographic seal created with a secret or private key so that tampering can be detected. JWTs are stateless: the server validates the signature without a database lookup, which is why they are widely used in APIs and OAuth 2.0 / OpenID Connect flows.</div>
+  </details>
+
+  <details>
+    <summary>Why does my JWT say "expired"?</summary>
+    <div class="faq-body">The <code>exp</code> claim is a Unix timestamp (seconds since 1 Jan 1970 UTC). When the current time exceeds that value, the token is expired. Common causes: the token was designed to be short-lived (access tokens often last 15–60 minutes), your system clock is wrong, or you are reusing a token from a previous session. Request a new token from your auth server — expired tokens cannot be extended without re-authentication or a refresh token flow.</div>
+  </details>
+
+  <details>
+    <summary>Why is the "none" algorithm dangerous?</summary>
+    <div class="faq-body">When <code>alg</code> is set to <code>none</code> in the header, the JWT has no signature. A malicious actor can craft a token with any claims they like (e.g. elevating their role to admin), set <code>alg: "none"</code>, and submit it. If the server accepts unsigned tokens, it will trust the forged claims. This attack was used to break several real-world systems. Secure JWT libraries reject <code>alg: none</code> by default — ensure yours does too and never whitelist it.</div>
+  </details>
+
+  <details>
+    <summary>What is the difference between HS256 and RS256?</summary>
+    <div class="faq-body"><b>HS256</b> (HMAC-SHA256) is symmetric: the same secret is used to both sign and verify tokens. Any service that can verify must also be trusted with the secret — meaning it could forge tokens. <b>RS256</b> (RSA-SHA256) is asymmetric: a private key signs, a public key verifies. Services only need the public key to verify — they cannot forge. For single-service or internal systems HS256 is fine with a strong random secret. For public APIs, multi-service architectures, or when third parties verify your tokens, prefer RS256 or ES256.</div>
+  </details>
+</section>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════ -->
+<footer>
+  <p>DevKit &mdash; Free developer tools &bull; No data stored, no tracking &bull; by <a href="/">paulorsousa.com</a></p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════ -->
+<script>
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function setOutput(id, html, cls = '') {
+  const el = document.getElementById(id);
+  el.className = 'output-box ' + cls;
+  el.innerHTML = html;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+
+async function copyOutput(id) {
+  const el = document.getElementById(id);
+  const text = el.innerText.trim();
+  if (!text || el.querySelector('.output-placeholder')) return;
+  try {
+    await navigator.clipboard.writeText(text);
+    const btn = el.parentElement.querySelector('.copy-btn');
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.style.color = 'var(--accent)';
+    setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 1600);
+  } catch { }
+}
+
+function clearTool(tool) {
+  if (tool === 'b64') {
+    document.getElementById('b64-input').value = '';
+    setOutput('b64-output', '<span class="output-placeholder">Result will appear here…</span>');
+  } else if (tool === 'json') {
+    document.getElementById('json-input').value = '';
+    setOutput('json-output', '<span class="output-placeholder">Formatted JSON will appear here…</span>');
+    document.getElementById('json-status').innerHTML = '';
+    document.getElementById('json-stats').style.display = 'none';
+    document.getElementById('json-stats').innerHTML = '';
+  } else if (tool === 'rx') {
+    document.getElementById('rx-pattern').value = '';
+    document.getElementById('rx-input').value = '';
+    document.getElementById('rx-status').innerHTML = '';
+    document.getElementById('rx-count').textContent = '';
+    document.getElementById('rx-preview').innerHTML = '<span class="output-placeholder">Matches will be highlighted here…</span>';
+  }
+}
+
+// ── BASE64 ─────────────────────────────────────────────────────────────────────
+function b64Encode() {
+  const text = document.getElementById('b64-input').value;
+  if (!text.trim()) return;
+  try {
+    // UTF-8 safe encoding
+    const encoded = btoa(encodeURIComponent(text).replace(/%([0-9A-F]{2})/g, (_, p) => String.fromCharCode(parseInt(p, 16))));
+    setOutput('b64-output', escHtml(encoded), 'output-success');
+  } catch (e) {
+    setOutput('b64-output', escHtml('Encoding failed: ' + e.message), 'output-error');
+  }
+}
+
+function b64Decode() {
+  const text = document.getElementById('b64-input').value;
+  if (!text.trim()) return;
+  const clean = text.replace(/\s/g, '');
+  if (!/^[A-Za-z0-9+/]*={0,2}$/.test(clean)) {
+    setOutput('b64-output', 'Invalid Base64 string. Check for illegal characters.', 'output-error');
+    return;
+  }
+  try {
+    // UTF-8 safe decoding
+    const decoded = decodeURIComponent(Array.from(atob(clean), c => '%' + c.charCodeAt(0).toString(16).padStart(2, '0')).join(''));
+    setOutput('b64-output', escHtml(decoded), 'output-success');
+  } catch (e) {
+    setOutput('b64-output', escHtml('Decoding failed: ' + e.message), 'output-error');
+  }
+}
+
+// ── JSON ───────────────────────────────────────────────────────────────────────
+function _countKeys(obj) {
+  if (typeof obj !== 'object' || obj === null) return 0;
+  return Object.keys(obj).length + Object.values(obj).reduce((s, v) => s + _countKeys(v), 0);
+}
+function _getDepth(obj, d = 0) {
+  if (typeof obj !== 'object' || obj === null) return d;
+  const vals = Object.values(obj);
+  return vals.length ? Math.max(...vals.map(v => _getDepth(v, d + 1))) : d;
+}
+
+function jsonCheck() {
+  const text = document.getElementById('json-input').value;
+  if (!text.trim()) return;
+  document.getElementById('json-status').innerHTML = '';
+  try {
+    const parsed = JSON.parse(text);
+    const pretty = JSON.stringify(parsed, null, 2);
+    document.getElementById('json-status').innerHTML = '<span class="status-pill pill-ok">✓ Valid JSON</span>';
+    const statsEl = document.getElementById('json-stats');
+    statsEl.style.display = 'flex';
+    statsEl.innerHTML = `
+      <span class="stat-chip">Type <b>${Array.isArray(parsed) ? 'array' : typeof parsed}</b></span>
+      <span class="stat-chip">Keys <b>${_countKeys(parsed)}</b></span>
+      <span class="stat-chip">Depth <b>${_getDepth(parsed)}</b></span>
+      <span class="stat-chip">Size <b>${new TextEncoder().encode(text).length} B</b></span>`;
+    setOutput('json-output', escHtml(pretty), 'output-success');
+  } catch (e) {
+    document.getElementById('json-status').innerHTML = '<span class="status-pill pill-err">✗ Invalid JSON</span>';
+    document.getElementById('json-stats').style.display = 'none';
+    const msg = e.message;
+    const lineMatch = msg.match(/line (\d+)/i);
+    const colMatch  = msg.match(/column (\d+)/i);
+    let display = msg;
+    if (lineMatch) display += `\n→ Line ${lineMatch[1]}${colMatch ? ', Column ' + colMatch[1] : ''}`;
+    setOutput('json-output', escHtml(display), 'output-error');
+  }
+}
+
+function jsonMinify() {
+  const text = document.getElementById('json-input').value;
+  if (!text.trim()) return;
+  try {
+    setOutput('json-output', escHtml(JSON.stringify(JSON.parse(text))), 'output-success');
+    document.getElementById('json-status').innerHTML = '<span class="status-pill pill-ok">✓ Minified</span>';
+  } catch (e) {
+    document.getElementById('json-status').innerHTML = '<span class="status-pill pill-err">✗ Fix JSON first</span>';
+    setOutput('json-output', escHtml(e.message || 'Invalid JSON'), 'output-error');
+  }
+}
+
+// ── REGEX ──────────────────────────────────────────────────────────────────────
+function getFlags() {
+  return [...document.querySelectorAll('.flag-btn.active')].map(b => b.dataset.flag).join('');
+}
+
+function toggleFlag(btn) {
+  btn.classList.toggle('active');
+  regexLive();
+}
+
+function regexLive() {
+  const pattern = document.getElementById('rx-pattern').value;
+  const testStr = document.getElementById('rx-input').value;
+  if (!pattern || !testStr) {
+    document.getElementById('rx-preview').innerHTML = '<span class="output-placeholder">Matches will be highlighted here…</span>';
+    document.getElementById('rx-count').textContent = '';
+    document.getElementById('rx-status').innerHTML = '';
+    return;
+  }
+  regexRun();
+}
+
+function regexRun() {
+  const pattern    = document.getElementById('rx-pattern').value;
+  const testString = document.getElementById('rx-input').value;
+  if (!pattern || !testString) return;
+
+  const statusEl = document.getElementById('rx-status');
+  const countEl  = document.getElementById('rx-count');
+  const preview  = document.getElementById('rx-preview');
+
+  try {
+    const safeFlags = getFlags().replace(/[^gimsuy]/g, '');
+    new RegExp(pattern, safeFlags); // throws if invalid
+    const gFlags = safeFlags.includes('g') ? safeFlags : safeFlags + 'g';
+    const re = new RegExp(pattern, gFlags);
+    const matches = [];
+    let m, guard = 0;
+    while ((m = re.exec(testString)) !== null && guard++ < 500) {
+      matches.push({ match: m[0], index: m.index, length: m[0].length });
+      if (m[0].length === 0) re.lastIndex++;
+    }
+
+    if (matches.length === 0) {
+      statusEl.innerHTML = '<span class="status-pill pill-err">No matches</span>';
+      countEl.textContent = '';
+      preview.innerHTML = escHtml(testString);
+      return;
+    }
+
+    statusEl.innerHTML = `<span class="status-pill pill-ok">✓ ${matches.length} match${matches.length !== 1 ? 'es' : ''}</span>`;
+    countEl.textContent = `${matches.length} found`;
+
+    let html = '', cursor = 0;
+    for (const hit of matches) {
+      if (hit.index > cursor) html += escHtml(testString.slice(cursor, hit.index));
+      html += `<mark class="hit" title="Match: ${escHtml(hit.match)}">${escHtml(hit.match)}</mark>`;
+      cursor = hit.index + hit.length;
+      if (hit.length === 0) { html += escHtml(testString[cursor] || ''); cursor++; }
+    }
+    html += escHtml(testString.slice(cursor));
+    preview.innerHTML = html;
+  } catch (e) {
+    statusEl.innerHTML = `<span class="status-pill pill-err">✗ ${escHtml(e.message)}</span>`;
+    countEl.textContent = '';
+    preview.innerHTML = '<span class="output-placeholder">Fix the pattern to see matches…</span>';
+  }
+}
+
+// ── JWT DEBUGGER ───────────────────────────────────────────────────────────────
+
+const JWT_CLAIMS = {
+  // RFC 7519 registered claims
+  iss: { name: 'Issuer',            desc: 'Who created and signed this token — typically the URL of your auth server or identity provider. Your API should verify this matches the expected issuer.' },
+  sub: { name: 'Subject',           desc: 'Who this token is about — usually a user ID or service account. This is the primary identifier of the authenticated entity.' },
+  aud: { name: 'Audience',          desc: 'Who this token is intended for. A receiving service should reject it if its own identifier is not listed here — this prevents a token issued for Service A from being replayed at Service B.' },
+  exp: { name: 'Expiration Time',   desc: 'Unix timestamp (seconds since 1 Jan 1970 UTC) after which this token must be rejected. Always validate server-side — never trust an expired token.', isTs: true },
+  nbf: { name: 'Not Before',        desc: 'Unix timestamp before which this token must be rejected. The token is not valid prior to this time — useful for tokens issued in advance of when they should activate.', isTs: true },
+  iat: { name: 'Issued At',         desc: 'Unix timestamp when this token was created. Can be used to enforce a maximum token age independently of exp.', isTs: true },
+  jti: { name: 'JWT ID',            desc: 'A unique identifier for this specific token. Can be tracked server-side to detect and reject replayed tokens — once used, refuse any future request with the same jti.' },
+  // Header-specific
+  alg: { name: 'Algorithm',         desc: 'The cryptographic algorithm used to sign this token. Asymmetric algorithms (RS256, ES256, PS256) are preferred — they separate signing from verification so verifiers cannot forge tokens.' },
+  typ: { name: 'Type',              desc: 'The media type of this token. "JWT" is the standard value for a JSON Web Token.' },
+  kid: { name: 'Key ID',            desc: 'Tells the verifier which key was used to sign this token. Essential when your auth server rotates keys — the verifier fetches the matching public key from a JWKS endpoint.' },
+  cty: { name: 'Content Type',      desc: 'Declares the media type of the secured payload. Typically omitted; only needed for nested JWTs.' },
+  // OIDC / common custom claims
+  email:          { name: 'Email',                    desc: 'The email address of the subject. Treat as unverified unless email_verified is true.' },
+  email_verified: { name: 'Email Verified',           desc: 'Whether the identity provider has confirmed this email address belongs to the subject.' },
+  name:           { name: 'Full Name',                desc: 'The full display name of the subject as registered with the identity provider.' },
+  given_name:     { name: 'Given Name',               desc: 'The first/given name of the subject.' },
+  family_name:    { name: 'Family Name',              desc: 'The last/family name of the subject.' },
+  picture:        { name: 'Profile Picture URL',      desc: 'URL of the subject\'s profile picture at the identity provider.' },
+  locale:         { name: 'Locale',                   desc: 'Preferred locale/language of the subject, e.g. "en-US".' },
+  azp:            { name: 'Authorized Party',         desc: 'The OAuth client this token was issued to. Present in OIDC when the authorized party differs from the audience.' },
+  scope:          { name: 'Scope',                    desc: 'Space-separated list of OAuth scopes this token grants. Your API must verify the required scope is present before serving a request.' },
+  roles:          { name: 'Roles',                    desc: 'Roles assigned to this user — used for role-based access control (RBAC). Structure varies by identity provider.' },
+  permissions:    { name: 'Permissions',              desc: 'Fine-grained permissions granted to this token — used for attribute-based access control (ABAC).' },
+  sid:            { name: 'Session ID',               desc: 'The session this token belongs to. Can be used to invalidate all tokens for a session on sign-out.' },
+  nonce:          { name: 'Nonce',                    desc: 'A random value linking a client session to a token. Prevents replay attacks in the OIDC implicit / hybrid flows.' },
+  acr:            { name: 'Authentication Context',   desc: 'Level of assurance used for authentication (e.g. 0 = password, 1 = MFA). Use to require stronger auth for sensitive operations.' },
+  amr:            { name: 'Auth Methods References',  desc: 'Authentication methods used, e.g. ["pwd", "otp"]. Useful for step-up auth policies.' },
+  at_hash:        { name: 'Access Token Hash',        desc: 'Hash of the access token — allows the client to verify the access token was not substituted.' },
+};
+
+function b64urlDecode(str) {
+  str = str.replace(/-/g, '+').replace(/_/g, '/');
+  while (str.length % 4) str += '=';
+  try { return decodeURIComponent(escape(atob(str))); } catch { return atob(str); }
+}
+
+function fmtTs(unix) {
+  return new Date(unix * 1000).toUTCString();
+}
+
+function fmtDuration(secs) {
+  const d = Math.floor(secs / 86400), h = Math.floor((secs % 86400) / 3600),
+        m = Math.floor((secs % 3600) / 60), s = secs % 60;
+  const p = [];
+  if (d) p.push(d + 'd');
+  if (h) p.push(h + 'h');
+  if (m) p.push(m + 'm');
+  if (!d && s) p.push(s + 's');
+  return p.length ? p.join(' ') : '< 1m';
+}
+
+let _jwtTimer = null;
+
+function _jwtTick(exp, nbf) {
+  const el = document.getElementById('jwt-countdown');
+  if (!el) { clearInterval(_jwtTimer); return; }
+  const now = Math.floor(Date.now() / 1000);
+  if (nbf && now < nbf) {
+    const diff = nbf - now;
+    el.innerHTML = `<b>NOT YET VALID</b>&ensp;&mdash;&ensp;Activates in <strong>${fmtDuration(diff)}</strong>`;
+    el.className = 'jwt-countdown warn';
+  } else if (!exp) {
+    el.innerHTML = `<b>NO EXPIRY</b>&ensp;&mdash;&ensp;This token never expires`;
+    el.className = 'jwt-countdown warn';
+    clearInterval(_jwtTimer);
+  } else if (now < exp) {
+    el.innerHTML = `<b>VALID</b>&ensp;&mdash;&ensp;Expires in <strong>${fmtDuration(exp - now)}</strong>`;
+    el.className = 'jwt-countdown ok';
+  } else {
+    el.innerHTML = `<b>EXPIRED</b>&ensp;&mdash;&ensp;Expired <strong>${fmtDuration(now - exp)}</strong> ago`;
+    el.className = 'jwt-countdown err';
+  }
+}
+
+function startJwtCountdown(exp, nbf) {
+  if (_jwtTimer) clearInterval(_jwtTimer);
+  _jwtTick(exp, nbf);
+  if (exp || nbf) _jwtTimer = setInterval(() => _jwtTick(exp, nbf), 1000);
+}
+
+function jwtSecurityWarnings(header, payload) {
+  const out = [];
+  const alg = (header.alg || '').toLowerCase();
+
+  if (alg === 'none') {
+    out.push({ level: 'critical',
+      title: '✗ Algorithm is "none" — token has no signature',
+      body:  'Anyone can craft or modify a token with alg:none and the server will accept it if not properly guarded. This is a well-documented attack vector (CVE-2015-9235). Ensure your JWT library rejects unsigned tokens unconditionally.' });
+  } else if (['hs256','hs384','hs512'].includes(alg)) {
+    out.push({ level: 'warn',
+      title: '⚠ Symmetric algorithm (HMAC) — secret strength is critical',
+      body:  `${header.alg} uses the same secret to sign and verify. Any service that can verify tokens can also forge them. For multi-service architectures prefer RS256 or ES256 (asymmetric). If you keep HMAC, use a minimum 256-bit cryptographically random secret — never a password, phrase, or short string.` });
+  } else if (['rs256','rs384','rs512','es256','es384','es512','ps256','ps384','ps512'].includes(alg)) {
+    out.push({ level: 'info',
+      title: '✓ Asymmetric algorithm — good foundation',
+      body:  `${header.alg} uses a private key to sign and a public key to verify. Verifying services cannot forge tokens. Confirm you are fetching the public key from a trusted JWKS endpoint and validating the kid claim on every request.` });
+  }
+
+  if (!payload.exp) {
+    out.push({ level: 'warn',
+      title: '⚠ No expiration (exp) claim',
+      body:  'This token never expires on its own. If stolen or leaked it remains permanently valid. Add an exp claim and keep access token lifetimes short (minutes to hours). Use a refresh token flow for long sessions.' });
+  } else if (payload.iat) {
+    const days = (payload.exp - payload.iat) / 86400;
+    if (days > 365) out.push({ level: 'warn',
+      title: '⚠ Very long token lifetime (' + Math.round(days) + ' days)',
+      body:  'Tokens valid for more than a year give attackers a large window if one is ever compromised. Issue short-lived access tokens (< 1 hour) and renew them via a separate refresh token.' });
+  }
+
+  if (!payload.aud) {
+    out.push({ level: 'info',
+      title: 'ℹ No audience (aud) claim',
+      body:  'Without an audience, a token issued for one service could be replayed at another. Add an aud claim set to the intended service identifier, and validate it on every receiving endpoint.' });
+  }
+
+  return out;
+}
+
+function renderClaimRows(obj) {
+  return Object.entries(obj).map(([k, v]) => {
+    const info = JWT_CLAIMS[k];
+    const isTs = info && info.isTs && typeof v === 'number';
+    let valHtml;
+    if (isTs) {
+      valHtml = `<div class="jwt-claim-value">${escHtml(String(v))}<div class="jwt-claim-ts">${escHtml(fmtTs(v))}</div></div>`;
+    } else if (typeof v === 'object' && v !== null) {
+      valHtml = `<div class="jwt-claim-value">${escHtml(JSON.stringify(v, null, 2))}</div>`;
+    } else {
+      valHtml = `<div class="jwt-claim-value">${escHtml(String(v))}</div>`;
+    }
+    return `<div class="jwt-claim-row">
+      <div class="jwt-claim-key">
+        <code>${escHtml(k)}</code>
+        ${info ? `<span class="jwt-claim-full-name">— ${escHtml(info.name)}</span>` : ''}
+      </div>
+      ${valHtml}
+      ${info ? `<div class="jwt-claim-desc">${escHtml(info.desc)}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+async function copyJwtSection(id) {
+  const el = document.getElementById(id);
+  const text = el.textContent.trim();
+  if (!text) return;
+  try {
+    await navigator.clipboard.writeText(text);
+    const lbl = el.closest('div').querySelector('.jwt-panel-label');
+    const btn = lbl ? lbl.querySelector('.copy-btn') : null;
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.style.color = 'var(--accent)';
+      setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 1600);
+    }
+  } catch {}
+}
+
+function jwtLive() {
+  const val = document.getElementById('jwt-input').value.trim();
+  if (val.split('.').length === 3) jwtDecode();
+  else if (!val) jwtClear();
+}
+
+function jwtDecode() {
+  if (_jwtTimer) { clearInterval(_jwtTimer); _jwtTimer = null; }
+
+  const token = document.getElementById('jwt-input').value.trim();
+  const errEl      = document.getElementById('jwt-error');
+  const visEl      = document.getElementById('jwt-vis');
+  const statusEl   = document.getElementById('jwt-status-wrap');
+  const warningsEl = document.getElementById('jwt-warnings');
+  const panelsEl   = document.getElementById('jwt-panels');
+
+  errEl.style.display = 'none';
+  visEl.style.display = 'none';
+  statusEl.style.display = 'none';
+  warningsEl.innerHTML = '';
+  panelsEl.style.display = 'none';
+
+  if (!token) return;
+
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    errEl.innerHTML = '<span class="status-pill pill-err">✗ Invalid JWT — expected 3 dot-separated parts (header.payload.signature)</span>';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  let header, payload;
+  try { header  = JSON.parse(b64urlDecode(parts[0])); } catch {
+    errEl.innerHTML = '<span class="status-pill pill-err">✗ Cannot decode header — is this a valid JWT?</span>';
+    errEl.style.display = 'block'; return;
+  }
+  try { payload = JSON.parse(b64urlDecode(parts[1])); } catch {
+    errEl.innerHTML = '<span class="status-pill pill-err">✗ Cannot decode payload — is this a valid JWT?</span>';
+    errEl.style.display = 'block'; return;
+  }
+
+  // Token visualizer
+  document.getElementById('jwt-token-parts').innerHTML =
+    `<span class="jwt-h">${escHtml(parts[0])}</span><span class="jwt-dot">.</span>` +
+    `<span class="jwt-p">${escHtml(parts[1])}</span><span class="jwt-dot">.</span>` +
+    `<span class="jwt-s">${escHtml(parts[2])}</span>`;
+  visEl.style.display = 'block';
+
+  // Validity badge + countdown
+  const exp = typeof payload.exp === 'number' ? payload.exp : null;
+  const nbf = typeof payload.nbf === 'number' ? payload.nbf : null;
+  const now = Math.floor(Date.now() / 1000);
+  let bClass, bText;
+  if (nbf && now < nbf)       { bClass = 'pill-info'; bText = 'NOT YET VALID'; }
+  else if (!exp)               { bClass = 'pill-info'; bText = 'NO EXPIRY'; }
+  else if (now < exp)          { bClass = 'pill-ok';   bText = '✓ VALID'; }
+  else                         { bClass = 'pill-err';  bText = '✗ EXPIRED'; }
+  document.getElementById('jwt-validity-badge').innerHTML =
+    `<span class="status-pill ${bClass}" style="font-size:13px;padding:5px 18px;">${bText}</span>`;
+  statusEl.style.display = 'block';
+  startJwtCountdown(exp, nbf);
+
+  // Security warnings
+  const warns = jwtSecurityWarnings(header, payload);
+  warningsEl.innerHTML = warns.map(w =>
+    `<div class="jwt-warning jwt-warning-${escHtml(w.level)}">
+       <div class="jwt-warning-title">${escHtml(w.title)}</div>
+       <div class="jwt-warning-body">${escHtml(w.body)}</div>
+     </div>`).join('');
+
+  // Header + Payload
+  document.getElementById('jwt-header-json').textContent  = JSON.stringify(header,  null, 2);
+  document.getElementById('jwt-payload-json').textContent = JSON.stringify(payload, null, 2);
+  document.getElementById('jwt-header-claims').innerHTML  = renderClaimRows(header);
+  document.getElementById('jwt-payload-claims').innerHTML = renderClaimRows(payload);
+  panelsEl.style.display = 'block';
+}
+
+function jwtClear() {
+  if (_jwtTimer) { clearInterval(_jwtTimer); _jwtTimer = null; }
+  document.getElementById('jwt-input').value = '';
+  document.getElementById('jwt-error').style.display      = 'none';
+  document.getElementById('jwt-vis').style.display        = 'none';
+  document.getElementById('jwt-status-wrap').style.display = 'none';
+  document.getElementById('jwt-warnings').innerHTML       = '';
+  document.getElementById('jwt-panels').style.display     = 'none';
+}
+
+// ── Keyboard shortcuts ─────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+    const active = document.activeElement;
+    if (active.id === 'b64-input') b64Encode();
+    else if (active.id === 'json-input') jsonCheck();
+    else if (active.id === 'rx-input' || active.id === 'rx-pattern') regexRun();
+    else if (active.id === 'jwt-input') jwtDecode();
+  }
+});
+</script>
+
+</body>
+</html>
