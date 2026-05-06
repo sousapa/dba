@@ -733,6 +733,83 @@
             border: 1px solid rgba(248, 113, 113, 0.2);
         }
 
+        /* --- DEVKIT CARD --- */
+        .devkit-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.25s;
+            max-width: 520px;
+        }
+
+        .devkit-card:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .devkit-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .devkit-card-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(37,99,235,0.07);
+            border: 1px solid rgba(37,99,235,0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .devkit-card-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .devkit-card-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 0.1rem;
+        }
+
+        .devkit-card-arrow {
+            color: var(--text-dim);
+            flex-shrink: 0;
+            transition: color 0.2s;
+        }
+
+        .devkit-card:hover .devkit-card-arrow { color: var(--accent); }
+
+        .devkit-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .devkit-tags span {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            padding: 0.2rem 0.5rem;
+            background: rgba(37,99,235,0.06);
+            border: 1px solid rgba(37,99,235,0.12);
+            border-radius: 4px;
+            color: var(--accent);
+        }
+
         /* --- DIVIDER --- */
         .divider {
             max-width: 800px;
@@ -767,6 +844,7 @@
             <a href="#experience" data-i18n="nav_experience">experience</a>
             <a href="#articles" data-i18n="nav_articles">articles</a>
             <a href="#contact" data-i18n="nav_contact">contact</a>
+            <a href="#tools" data-i18n="nav_tools">tools</a>
             <button class="lang-toggle" id="langToggle" aria-label="Switch language">
                 <span class="lang-flag" id="langFlag">🇧🇷</span>
                 <span class="lang-label" id="langLabel">PT</span>
@@ -842,6 +920,29 @@
                 </button>
             </div>
         </div>
+    </section>
+
+    <!-- TOOLS -->
+    <div class="divider"><hr></div>
+    <section id="tools">
+        <p class="section-label" data-i18n="tools_label">// tools</p>
+        <h2 class="section-title" data-i18n="tools_title">Things I've built</h2>
+        <a href="devkit.html" class="devkit-card" rel="noopener">
+            <div class="devkit-card-header">
+                <div class="devkit-card-icon">⟨/⟩</div>
+                <div style="flex:1">
+                    <div class="devkit-card-name">DevKit</div>
+                    <div class="devkit-card-desc" data-i18n="devkit_desc">Free online developer tools — Base64, JSON, Regex &amp; JWT Debugger</div>
+                </div>
+                <svg class="devkit-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </div>
+            <div class="devkit-tags">
+                <span>Base64</span>
+                <span>JSON Validator</span>
+                <span>Regex Tester</span>
+                <span>JWT Debugger</span>
+            </div>
+        </a>
     </section>
 
     <!-- CONTACT -->
@@ -1082,6 +1183,10 @@
                 nav_skills: "skills",
                 nav_articles: "articles",
                 nav_contact: "contact",
+                nav_tools: "tools",
+                tools_label: "// tools",
+                tools_title: "Things I've built",
+                devkit_desc: "Free online developer tools — Base64, JSON, Regex &amp; JWT Debugger",
                 hero_subtitle: 'Senior Database Administrator. 20+ years keeping databases fast, reliable, and secure.',
                 about_label: "// about",
                 about_title: "A bit about me",
@@ -1120,6 +1225,10 @@
                 nav_skills: "habilidades",
                 nav_articles: "artigos",
                 nav_contact: "contato",
+                nav_tools: "tools",
+                tools_label: "// ferramentas",
+                tools_title: "Coisas que construí",
+                devkit_desc: "Ferramentas online gratuitas — Base64, JSON, Regex e JWT Debugger",
                 hero_subtitle: 'Administrador Sênior de Banco de Dados. Mais de 20 anos mantendo bancos de dados rápidos, confiáveis e seguros.',
                 about_label: "// sobre",
                 about_title: "Um pouco sobre mim",
